@@ -1,0 +1,112 @@
+<script type="text/javascript">
+	RED.nodes.registerType('division_compare',{
+		category: 'Processing Module',
+		color: '#ff0028',
+		defaults: {
+            compare_select: {value:"interval", required:true},
+            numerator: {value: ""},
+            denominator: {value: ""},
+            maxValue: {value: null},
+			minValue: {value: null},
+			name:{value:""}
+		},
+		inputs:1,
+		outputs:1,
+		icon: "CPU.svg",
+        paletteLabel: "Division Compare",
+		label: function() {
+			return this.name? "Division Compare - " + this.name: "Disivion Compare";
+		},
+		oneditprepare: function() { 
+			var node = this;
+			var scope = node.scope || [];
+
+            $("#node-input-compare_select").on("change", function(e) {
+				var compare = $(this).val();
+				if (compare === "interval"){ $(".node-input-max-value").show(); $(".node-input-min-value").show(); }
+				if (compare === "maxValue"){ $(".node-input-max-value").show(); $(".node-input-min-value").hide(); }
+				if (compare === "minValue"){ $(".node-input-max-value").hide(); $(".node-input-min-value").show(); }
+            });
+		}
+	});	
+</script>
+
+<style>
+	label{ width: 100% !important; margin-bottom: 2px !important; }
+	.columm{ display: flex !important; flex-direction: column !important; }
+	.hr-div-compare{ display: flex !important; justify-content: space-between !important; align-items: center; }
+	.optional{ height: max-content !important; margin-top: 10px !important; }
+	.descript{ text-align: center; }
+	.columm-50{ display: flex !important; flex-direction: column !important; width: 50% !important; float: left !important; }
+    .columm-30{ display: flex !important; flex-direction: column !important; width: 30% !important; float: left !important; }
+    .columm-70{ display: flex !important; flex-direction: column !important; width: 70% !important; float: left !important; }
+    .hr-div-get{ display: flex !important; justify-content: space-between !important; margin-top: 250px !important; }
+    .optional{ height: max-content !important; margin-top: 10px !important; }
+    .descript{ text-align: center; }
+    .descript-div{ max-width: 444px !important; }
+    span.red-ui-typedInput-type-label { width: 250px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .btn-aln{ display: flex !important; flex-direction: row-reverse !important; align-content: center; align-items: flex-end; }
+    .box { position: relative; float: left; width: 100%; display: flex; align-items: center; }
+    hr { width: 33% !important; float: left !important; }
+</style>
+
+<script type="text/html" data-template-name="division_compare">
+	<div class="form-row columm descript-div">
+		<strong class="descript">
+			Bloco para comparar o resultado de uma divisão.
+		</strong>
+	</div>
+
+	<div style=" position: relative; display:flex;">
+        <div class="form-row columm-70">
+            <label style="width: 50% !important;" for="node-input-name" ><i class="fa fa-tag"></i> Identification Note</label>
+            <input type="text" id="node-input-name" placeholder="Name" style="width: 100%">
+        </div>
+	</div>
+	<div class="hr-div-compare">
+		<hr style="width:33% !important; float: left !important;">
+        Division Compare
+        <hr style="width:33% !important; float: left !important;">
+    </div>
+    <div class="form-row"  style="display: flex; align-items: center;">
+        <div class='form-row columm-30' style="margin-right: 10px;">
+            <label for='node-input-numerator'><i class='fa fa-envelope'></i> Numerator</label>
+            <input type='text' id='node-input-numerator' placeholder='Numerator' style='width:100%;'>
+        </div>
+        <div class='form-row columm-30'>
+            <label for='node-input-denominator'><i class='fa fa-envelope'></i> Denominator</label>
+            <input type='text' id='node-input-denominator' placeholder='Denominador' style='width:100%;'>
+        </div>
+    </div>
+    <div class="form-row "  style=" position: relative; display:flex;">
+        <div class="form-row columm"  style="width: max-content;">
+            <label style=" margin-top: 8px;" for="node-input-compare_select"><i class="fas fa-sliders-h"></i> Comparison Type:</label>
+            <select id="node-input-compare_select" style="width: 160px;">
+                <option value="interval">Interval</option>
+                <option value="maxValue">Maximum value (<)</option>
+                <option value="minValue">Minimum value (>)</option>
+            </select>
+        </div>
+        <div class="form-row columm-70" style="display: flex; padding-left: 10px;">
+            <div class=box>
+                <div class="node-input-min-value" style="display: none;  float: left; margin-right: 10px;">
+                    <div class="columm">
+                        <label for="node-input-minValue" style="margin-top: 8px; width: max-content !important;"><i class="fa fa-envelope"></i> Minimum Value: </label>
+                        <input type="number" id="node-input-minValue" style=" width:120px !important ">
+                    </div>
+                </div>
+                <div class="node-input-max-value" style="display: none;">
+                    <div class="columm">
+                        <label for="node-input-maxValue" style="margin-top: 8px; width: max-content !important"><i class="fa fa-envelope"></i> Maximum Value: </label>
+                        <input type="number" id="node-input-maxValue" style=" width:120px !important ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</script>
+
+<script type="text/html" data-help-name="division_compare">
+  	<p>Makes the rest of the comparisons adjacent to the “get command message”.</p>
+</script>

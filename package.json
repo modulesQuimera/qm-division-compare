@@ -1,0 +1,25 @@
+{
+  "name": "qm-division-compare",
+  "version": "1.0.0",
+  "description": "Bloco para comparar o resultado de uma divisão.",
+  "main": "division_compare.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/modulesQuimera/qm-division-compare.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/modulesQuimera/qm-division-compare/issues"
+  },
+  "homepage": "https://github.com/modulesQuimera/qm-division-compare#readme",
+  "node-red" : {
+    "nodes": {
+        "division_compare": "division_compare.js"
+    }
+  }
+}
